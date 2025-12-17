@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/cloudflare/cloudflare-go"
-	"github.com/coollabsio/cf/internal/config"
+	"github.com/coollabsio/cloudflare-cli/internal/config"
 )
 
 // Client wraps the Cloudflare API client with convenience methods

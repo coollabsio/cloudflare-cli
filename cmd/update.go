@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/coollabsio/cf/internal/version"
+	"github.com/coollabsio/cloudflare-cli/internal/version"
 	"github.com/creativeprojects/go-selfupdate"
 	goversion "github.com/hashicorp/go-version"
 	"github.com/spf13/cobra"

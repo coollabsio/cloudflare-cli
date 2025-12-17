@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/coollabsio/cf/internal/client"
-	"github.com/coollabsio/cf/internal/config"
+	"github.com/coollabsio/cloudflare-cli/internal/client"
+	"github.com/coollabsio/cloudflare-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 

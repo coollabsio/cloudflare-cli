@@ -1,4 +1,4 @@
-module github.com/coollabsio/cf
+module github.com/coollabsio/cloudflare-cli
 
 go 1.25.5
 

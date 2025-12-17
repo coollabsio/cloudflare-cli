@@ -17,7 +17,7 @@ curl -fsSL https://raw.githubusercontent.com/coollabsio/cloudflare-cli/main/scri
 ### Using `go install`
 
 ```bash
-go install github.com/coollabsio/cf@latest
+go install github.com/coollabsio/cloudflare-cli@latest
 ```
 
 This will install the `cf` binary in your `$GOPATH/bin` directory (usually `~/go/bin`). Make sure this directory is in your `$PATH`.
@@ -25,8 +25,8 @@ This will install the `cf` binary in your `$GOPATH/bin` directory (usually `~/go
 ### Build from source
 
 ```bash
-git clone https://github.com/coollabsio/cf.git
-cd cf
+git clone https://github.com/coollabsio/cloudflare-cli.git
+cd cloudflare-cli
 go build -o cf .
 ```
 
