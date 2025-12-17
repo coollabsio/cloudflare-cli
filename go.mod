@@ -1,4 +1,4 @@
-module github.com/heyandras/cfdns
+module github.com/heyandras/cf
 
 go 1.25.5
 

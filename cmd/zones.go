@@ -3,8 +3,8 @@ package cmd
 import (
 	"context"
 
-	"github.com/heyandras/cfdns/internal/client"
-	"github.com/heyandras/cfdns/internal/output"
+	"github.com/heyandras/cf/internal/client"
+	"github.com/heyandras/cf/internal/output"
 	"github.com/spf13/cobra"
 )
 
@@ -55,8 +55,8 @@ var zonesGetCmd = &cobra.Command{
 	Long: `Get details for a specific zone by name or ID.
 
 Examples:
-  cfdns zones get example.com
-  cfdns zones get 023e105f4ecef8ad9ca31a8372d0c353
+  cf zones get example.com
+  cf zones get 023e105f4ecef8ad9ca31a8372d0c353
 
 Note: Looking up zones by name requires the "zone:list" permission.
 If you have a zone-specific token, use the zone ID directly.`,

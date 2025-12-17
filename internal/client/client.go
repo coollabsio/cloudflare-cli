@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/cloudflare/cloudflare-go"
-	"github.com/heyandras/cfdns/internal/config"
+	"github.com/heyandras/cf/internal/config"
 )
 
 // Client wraps the Cloudflare API client with convenience methods
@@ -102,7 +102,7 @@ func (c *Client) GetZone(ctx context.Context, nameOrID string) (*Zone, error) {
 
 This usually happens when your API token is scoped to specific zones.
 To fix this, either:
-  1. Use the zone ID directly: cfdns zones get <zone-id>
+  1. Use the zone ID directly: cf zones get <zone-id>
   2. Grant your token "All zones" read permission
 
 Error: %w`, err)

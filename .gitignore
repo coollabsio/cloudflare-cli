@@ -1,0 +1,19 @@
+# Binary
+cf
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage.out
+coverage.html
+
+# Vendor (if using go mod vendor)
+vendor/

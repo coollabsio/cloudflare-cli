@@ -7,7 +7,7 @@ A command-line tool for managing Cloudflare DNS records, built with Go using the
 ### Using `go install`
 
 ```bash
-go install github.com/heyandras/cfdns@latest
+go install github.com/heyandras/cf@latest
 ```
 
 This will install the `cf` binary in your `$GOPATH/bin` directory (usually `~/go/bin`). Make sure this directory is in your `$PATH`.
@@ -15,8 +15,8 @@ This will install the `cf` binary in your `$GOPATH/bin` directory (usually `~/go
 ### Build from source
 
 ```bash
-git clone https://github.com/heyandras/cfdns.git
-cd cfdns
+git clone https://github.com/heyandras/cf.git
+cd cf
 go build -o cf .
 ```
 
@@ -217,7 +217,7 @@ go install .
 ## Architecture
 
 ```
-cfdns/
+cf/
 ├── main.go                 # Entry point
 ├── cmd/
 │   ├── root.go            # CLI setup, global flags
