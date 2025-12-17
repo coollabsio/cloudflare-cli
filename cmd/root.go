@@ -3,8 +3,8 @@ package cmd
 import (
 	"os"
 
-	"github.com/heyandras/cf/internal/config"
-	"github.com/heyandras/cf/internal/output"
+	"github.com/coollabsio/cf/internal/config"
+	"github.com/coollabsio/cf/internal/output"
 	"github.com/spf13/cobra"
 )
 

@@ -1,4 +1,4 @@
-module github.com/heyandras/cf
+module github.com/coollabsio/cf
 
 go 1.25.5
 
