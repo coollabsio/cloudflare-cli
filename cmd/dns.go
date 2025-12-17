@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/coollabsio/cf/internal/client"
-	"github.com/coollabsio/cf/internal/output"
+	"github.com/coollabsio/cloudflare-cli/internal/client"
+	"github.com/coollabsio/cloudflare-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 

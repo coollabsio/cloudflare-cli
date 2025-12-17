@@ -3,9 +3,9 @@ package cmd
 import (
 	"os"
 
-	"github.com/coollabsio/cf/internal/config"
-	"github.com/coollabsio/cf/internal/output"
-	"github.com/coollabsio/cf/internal/version"
+	"github.com/coollabsio/cloudflare-cli/internal/config"
+	"github.com/coollabsio/cloudflare-cli/internal/output"
+	"github.com/coollabsio/cloudflare-cli/internal/version"
 	"github.com/spf13/cobra"
 )
 

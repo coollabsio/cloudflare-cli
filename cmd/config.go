@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/coollabsio/cf/internal/config"
+	"github.com/coollabsio/cloudflare-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 

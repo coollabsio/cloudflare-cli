@@ -1,6 +1,6 @@
 package main
 
-import "github.com/coollabsio/cf/cmd"
+import "github.com/coollabsio/cloudflare-cli/cmd"
 
 func main() {
 	cmd.Execute()
