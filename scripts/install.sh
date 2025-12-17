@@ -6,7 +6,7 @@
 set -e  # Exit on error
 
 # Configuration
-REPO="coollabsio/cf"
+REPO="coollabsio/cloudflare-cli"
 BINARY_NAME="cf"
 GLOBAL_INSTALL_DIR="/usr/local/bin"
 USER_INSTALL_DIR="$HOME/.local/bin"
