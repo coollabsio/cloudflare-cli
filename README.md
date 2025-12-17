@@ -8,10 +8,10 @@ A command-line tool for managing Cloudflare DNS records, built with Go using the
 
 ```bash
 # Global install (requires sudo)
-curl -fsSL https://raw.githubusercontent.com/coollabsio/cf/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/coollabsio/cloudflare-cli/main/scripts/install.sh | bash
 
 # User install (no sudo required)
-curl -fsSL https://raw.githubusercontent.com/coollabsio/cf/main/scripts/install.sh | bash -s -- --user
+curl -fsSL https://raw.githubusercontent.com/coollabsio/cloudflare-cli/main/scripts/install.sh | bash -s -- --user
 ```
 
 ### Using `go install`

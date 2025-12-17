@@ -37,7 +37,7 @@ func StartUpdateCheck() {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		latest, found, err := selfupdate.DetectLatest(ctx, selfupdate.ParseSlug("coollabsio/cf"))
+		latest, found, err := selfupdate.DetectLatest(ctx, selfupdate.ParseSlug("coollabsio/cloudflare-cli"))
 		if err != nil || !found {
 			return
 		}
