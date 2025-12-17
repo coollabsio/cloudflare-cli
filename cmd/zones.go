@@ -116,7 +116,7 @@ func writeZoneTable(zones []client.Zone) error {
 
 // writeDNSRecordTable writes DNS records in table format
 func writeDNSRecordTable(records []client.DNSRecord) error {
-	headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied"}
+	headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied", "Comment"}
 	var rows [][]string
 	for _, r := range records {
 		rows = append(rows, []string{
@@ -126,6 +126,7 @@ func writeDNSRecordTable(records []client.DNSRecord) error {
 			r.Content,
 			output.FormatTTL(r.TTL),
 			output.FormatBool(r.Proxied),
+			r.Comment,
 		})
 	}
 	return out.WriteTable(headers, rows)
