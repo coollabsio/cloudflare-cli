@@ -4,6 +4,16 @@ A command-line tool for managing Cloudflare DNS records, built with Go using the
 
 ## Installation
 
+### Quick Install (recommended)
+
+```bash
+# Global install (requires sudo)
+curl -fsSL https://raw.githubusercontent.com/coollabsio/cf/main/scripts/install.sh | bash
+
+# User install (no sudo required)
+curl -fsSL https://raw.githubusercontent.com/coollabsio/cf/main/scripts/install.sh | bash -s -- --user
+```
+
 ### Using `go install`
 
 ```bash
