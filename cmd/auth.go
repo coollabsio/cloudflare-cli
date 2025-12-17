@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/heyandras/cf/internal/client"
-	"github.com/heyandras/cf/internal/config"
+	"github.com/coollabsio/cf/internal/client"
+	"github.com/coollabsio/cf/internal/config"
 	"github.com/spf13/cobra"
 )
 
