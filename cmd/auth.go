@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/heyandras/cfdns/internal/client"
-	"github.com/heyandras/cfdns/internal/config"
+	"github.com/heyandras/cf/internal/client"
+	"github.com/heyandras/cf/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -52,7 +52,7 @@ var authSaveCmd = &cobra.Command{
 	Long: `Save an API token to the config file (~/.cloudflare/config.yaml).
 
 Example:
-  cfdns auth save YOUR_API_TOKEN`,
+  cf auth save YOUR_API_TOKEN`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		token := args[0]

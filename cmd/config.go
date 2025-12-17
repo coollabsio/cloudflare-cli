@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/heyandras/cfdns/internal/config"
+	"github.com/heyandras/cf/internal/config"
 	"github.com/spf13/cobra"
 )
 

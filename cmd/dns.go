@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/heyandras/cfdns/internal/client"
-	"github.com/heyandras/cfdns/internal/output"
+	"github.com/heyandras/cf/internal/client"
+	"github.com/heyandras/cf/internal/output"
 	"github.com/spf13/cobra"
 )
 
@@ -29,10 +29,10 @@ var dnsListCmd = &cobra.Command{
 	Long: `List DNS records for a zone.
 
 Examples:
-  cfdns dns list example.com
-  cfdns dns list example.com --type A
-  cfdns dns list example.com --name www
-  cfdns dns list 023e105f4ecef8ad9ca31a8372d0c353`,
+  cf dns list example.com
+  cf dns list example.com --type A
+  cf dns list example.com --name www
+  cf dns list 023e105f4ecef8ad9ca31a8372d0c353`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := client.New(cfg)
@@ -66,7 +66,7 @@ var dnsGetCmd = &cobra.Command{
 	Long: `Get details for a specific DNS record.
 
 Example:
-  cfdns dns get example.com 372e67954025e0ba6aaa6d586b9e0b59`,
+  cf dns get example.com 372e67954025e0ba6aaa6d586b9e0b59`,
 	Args: cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := client.New(cfg)
@@ -108,9 +108,9 @@ var dnsCreateCmd = &cobra.Command{
 	Long: `Create a new DNS record.
 
 Examples:
-  cfdns dns create example.com --name www --type A --content 192.0.2.1
-  cfdns dns create example.com --name www --type CNAME --content example.com --proxied
-  cfdns dns create example.com --name mail --type MX --content mail.example.com --priority 10`,
+  cf dns create example.com --name www --type A --content 192.0.2.1
+  cf dns create example.com --name www --type CNAME --content example.com --proxied
+  cf dns create example.com --name mail --type MX --content mail.example.com --priority 10`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if dnsType == "" || dnsName == "" || dnsContent == "" {
@@ -262,7 +262,7 @@ var dnsDeleteCmd = &cobra.Command{
 	Long: `Delete a DNS record.
 
 Example:
-  cfdns dns delete example.com 372e67954025e0ba6aaa6d586b9e0b59`,
+  cf dns delete example.com 372e67954025e0ba6aaa6d586b9e0b59`,
 	Args: cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := client.New(cfg)
@@ -291,8 +291,8 @@ var dnsFindCmd = &cobra.Command{
 	Long: `Find DNS records by name and/or type. Useful for getting record IDs.
 
 Examples:
-  cfdns dns find example.com --name www --type A
-  cfdns dns find example.com --name mail --type MX`,
+  cf dns find example.com --name www --type A
+  cf dns find example.com --name mail --type MX`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if dnsName == "" && dnsType == "" {

@@ -1,0 +1,26 @@
+# Binary
+cf
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage.out
+coverage.html
+
+# Documentation
+README.md
+LICENSE
+CLAUDE.md
+
+# Vendor (if using go mod vendor)
+vendor/
