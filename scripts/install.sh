@@ -157,8 +157,8 @@ check_existing_installation() {
     current_version=$(cf version 2>/dev/null | head -n1 || echo "unknown")
     echo -e "${YELLOW}Cloudflare DNS CLI is already installed: ${current_version}${NC}"
     echo -e "This will upgrade/reinstall to version ${GREEN}${1}${NC}"
-    read -p "Continue? [y/N] " -n 1 -r
-    echo
+    read -p "Continue? [y/N] " -n 1 -r < /dev/tty
+    echo >&2
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
       echo "Installation cancelled."
       exit 0
