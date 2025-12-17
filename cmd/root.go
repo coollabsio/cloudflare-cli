@@ -5,6 +5,7 @@ import (
 
 	"github.com/coollabsio/cf/internal/config"
 	"github.com/coollabsio/cf/internal/output"
+	"github.com/coollabsio/cf/internal/version"
 	"github.com/spf13/cobra"
 )
 
@@ -29,6 +30,9 @@ Configure authentication using environment variables:
 Or create a config file at ~/.cloudflare/config.yaml:
   api_token: your-token-here`,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		// Start async update check (non-blocking)
+		version.StartUpdateCheck()
+
 		var err error
 		cfg, err = config.Load(cfgFile)
 		if err != nil {
@@ -50,6 +54,10 @@ Or create a config file at ~/.cloudflare/config.yaml:
 		}
 		out = output.NewWriter(format)
 		return nil
+	},
+	PersistentPostRun: func(cmd *cobra.Command, args []string) {
+		// Print update notification if available (after command output)
+		version.PrintUpdateMessage()
 	},
 }
 
