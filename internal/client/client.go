@@ -140,6 +140,7 @@ type DNSRecord struct {
 	TTL      int
 	Proxied  bool
 	Priority *uint16
+	Comment  string
 }
 
 // ListDNSRecords returns DNS records for a zone
@@ -171,6 +172,7 @@ func (c *Client) ListDNSRecords(ctx context.Context, zoneID string, recordType, 
 			TTL:      r.TTL,
 			Proxied:  boolValue(r.Proxied),
 			Priority: r.Priority,
+			Comment:  r.Comment,
 		}
 		result = append(result, rec)
 	}
@@ -193,6 +195,7 @@ func (c *Client) GetDNSRecord(ctx context.Context, zoneID, recordID string) (*DN
 		TTL:      r.TTL,
 		Proxied:  boolValue(r.Proxied),
 		Priority: r.Priority,
+		Comment:  r.Comment,
 	}, nil
 }
 
@@ -204,6 +207,7 @@ type CreateDNSRecordParams struct {
 	TTL      int
 	Proxied  bool
 	Priority *uint16
+	Comment  string
 }
 
 // CreateDNSRecord creates a new DNS record
@@ -217,6 +221,7 @@ func (c *Client) CreateDNSRecord(ctx context.Context, zoneID string, params Crea
 		TTL:      params.TTL,
 		Proxied:  &params.Proxied,
 		Priority: params.Priority,
+		Comment:  params.Comment,
 	}
 
 	r, err := c.api.CreateDNSRecord(ctx, rc, createParams)
@@ -232,6 +237,7 @@ func (c *Client) CreateDNSRecord(ctx context.Context, zoneID string, params Crea
 		TTL:      r.TTL,
 		Proxied:  boolValue(r.Proxied),
 		Priority: r.Priority,
+		Comment:  r.Comment,
 	}, nil
 }
 
@@ -243,6 +249,7 @@ type UpdateDNSRecordParams struct {
 	TTL      *int
 	Proxied  *bool
 	Priority *uint16
+	Comment  *string
 }
 
 // UpdateDNSRecord updates an existing DNS record
@@ -256,6 +263,7 @@ func (c *Client) UpdateDNSRecord(ctx context.Context, zoneID, recordID string, p
 		Content:  params.Content,
 		Proxied:  params.Proxied,
 		Priority: params.Priority,
+		Comment:  params.Comment,
 	}
 
 	if params.TTL != nil {
@@ -275,6 +283,7 @@ func (c *Client) UpdateDNSRecord(ctx context.Context, zoneID, recordID string, p
 		TTL:      r.TTL,
 		Proxied:  boolValue(r.Proxied),
 		Priority: r.Priority,
+		Comment:  r.Comment,
 	}, nil
 }
 

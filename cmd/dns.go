@@ -3,6 +3,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/coollabsio/cf/internal/client"
 	"github.com/coollabsio/cf/internal/output"
@@ -16,6 +17,8 @@ var (
 	dnsTTL      int
 	dnsProxied  string
 	dnsPriority uint16
+	dnsComment  string
+	dnsSearch   string
 )
 
 var dnsCmd = &cobra.Command{
@@ -32,6 +35,7 @@ Examples:
   cf dns list example.com
   cf dns list example.com --type A
   cf dns list example.com --name www
+  cf dns list example.com --search "production"
   cf dns list 023e105f4ecef8ad9ca31a8372d0c353`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -49,6 +53,20 @@ Examples:
 		records, err := c.ListDNSRecords(ctx, zoneID, dnsType, dnsName)
 		if err != nil {
 			return err
+		}
+
+		// Filter by search term (case-insensitive search in name, content, comment)
+		if dnsSearch != "" {
+			search := strings.ToLower(dnsSearch)
+			var filtered []client.DNSRecord
+			for _, r := range records {
+				if strings.Contains(strings.ToLower(r.Name), search) ||
+					strings.Contains(strings.ToLower(r.Content), search) ||
+					strings.Contains(strings.ToLower(r.Comment), search) {
+					filtered = append(filtered, r)
+				}
+			}
+			records = filtered
 		}
 
 		if len(records) == 0 {
@@ -89,7 +107,7 @@ Example:
 			return out.WriteJSON(record)
 		}
 
-		headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied"}
+		headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied", "Comment"}
 		rows := [][]string{{
 			record.ID,
 			record.Type,
@@ -97,6 +115,7 @@ Example:
 			record.Content,
 			output.FormatTTL(record.TTL),
 			output.FormatBool(record.Proxied),
+			record.Comment,
 		}}
 		return out.WriteTable(headers, rows)
 	},
@@ -143,6 +162,7 @@ Examples:
 			Content: dnsContent,
 			TTL:     dnsTTL,
 			Proxied: proxied,
+			Comment: dnsComment,
 		}
 		if dnsPriority > 0 {
 			params.Priority = &dnsPriority
@@ -158,7 +178,7 @@ Examples:
 		}
 
 		out.WriteSuccess(fmt.Sprintf("Created DNS record: %s", record.ID))
-		headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied"}
+		headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied", "Comment"}
 		rows := [][]string{{
 			record.ID,
 			record.Type,
@@ -166,6 +186,7 @@ Examples:
 			record.Content,
 			output.FormatTTL(record.TTL),
 			output.FormatBool(record.Proxied),
+			record.Comment,
 		}}
 		return out.WriteTable(headers, rows)
 	},
@@ -232,6 +253,9 @@ Examples:
 		if cmd.Flags().Changed("priority") {
 			params.Priority = &dnsPriority
 		}
+		if cmd.Flags().Changed("comment") {
+			params.Comment = &dnsComment
+		}
 
 		record, err := c.UpdateDNSRecord(ctx, zoneID, args[1], params)
 		if err != nil {
@@ -243,7 +267,7 @@ Examples:
 		}
 
 		out.WriteSuccess(fmt.Sprintf("Updated DNS record: %s", record.ID))
-		headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied"}
+		headers := []string{"ID", "Type", "Name", "Content", "TTL", "Proxied", "Comment"}
 		rows := [][]string{{
 			record.ID,
 			record.Type,
@@ -251,6 +275,7 @@ Examples:
 			record.Content,
 			output.FormatTTL(record.TTL),
 			output.FormatBool(record.Proxied),
+			record.Comment,
 		}}
 		return out.WriteTable(headers, rows)
 	},
@@ -330,6 +355,7 @@ func init() {
 	// List command
 	dnsListCmd.Flags().StringVarP(&dnsType, "type", "t", "", "filter by record type (A, AAAA, CNAME, TXT, MX, etc.)")
 	dnsListCmd.Flags().StringVarP(&dnsName, "name", "n", "", "filter by record name")
+	dnsListCmd.Flags().StringVarP(&dnsSearch, "search", "s", "", "search in name, content, and comment (case-insensitive)")
 	dnsCmd.AddCommand(dnsListCmd)
 
 	// Get command
@@ -343,6 +369,7 @@ func init() {
 	dnsCreateCmd.Flags().StringVar(&dnsProxied, "proxied", "", "proxy through Cloudflare (true|false)")
 	dnsCreateCmd.Flags().Lookup("proxied").NoOptDefVal = "true"
 	dnsCreateCmd.Flags().Uint16Var(&dnsPriority, "priority", 0, "record priority (for MX, SRV)")
+	dnsCreateCmd.Flags().StringVar(&dnsComment, "comment", "", "comment for the record")
 	dnsCmd.AddCommand(dnsCreateCmd)
 
 	// Update command
@@ -353,6 +380,7 @@ func init() {
 	dnsUpdateCmd.Flags().StringVar(&dnsProxied, "proxied", "", "set proxy status (true|false)")
 	dnsUpdateCmd.Flags().Lookup("proxied").NoOptDefVal = "true"
 	dnsUpdateCmd.Flags().Uint16Var(&dnsPriority, "priority", 0, "record priority (for MX, SRV)")
+	dnsUpdateCmd.Flags().StringVar(&dnsComment, "comment", "", "comment for the record (use empty string to clear)")
 	dnsCmd.AddCommand(dnsUpdateCmd)
 
 	// Delete command
