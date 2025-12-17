@@ -204,3 +204,12 @@ func TestDNSCreate(t *testing.T) {
 - Handle errors explicitly, provide helpful messages
 - Use context for cancellation
 - Follow Cloudflare API naming conventions for consistency
+
+## Documentation Requirements
+
+When adding or modifying API features:
+1. Update the command's `Long` description with usage examples
+2. Add new flags to the `init()` function with clear help text
+3. Update this CLAUDE.md file if adding new commands or significant features
+4. Ensure `--help` output is clear and includes examples where helpful
+5. Update README.md with new commands, flags, or usage examples

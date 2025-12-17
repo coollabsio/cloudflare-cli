@@ -82,6 +82,7 @@ Available config keys:
 - `cf dns list <zone>` - List DNS records
   - `--type, -t` - Filter by record type (A, AAAA, CNAME, TXT, MX, etc.)
   - `--name, -n` - Filter by record name
+  - `--search, -s` - Search in name, content, and comment (case-insensitive)
 - `cf dns get <zone> <record-id>` - Get DNS record details
 - `cf dns create <zone>` - Create a DNS record
   - `--type, -t` - Record type (required)
@@ -90,6 +91,7 @@ Available config keys:
   - `--ttl` - TTL in seconds (1 = auto, default: 1)
   - `--proxied` - Proxy through Cloudflare (true|false)
   - `--priority` - Record priority (for MX, SRV)
+  - `--comment` - Comment for the record
 - `cf dns update <zone> <record-id>` - Update a DNS record
   - Only specify fields you want to change
   - `--type, -t` - New record type
@@ -98,6 +100,7 @@ Available config keys:
   - `--ttl` - TTL in seconds
   - `--proxied` - Set proxy status (true|false)
   - `--priority` - Record priority
+  - `--comment` - Comment for the record (use empty string to clear)
 - `cf dns delete <zone> <record-id>` - Delete a DNS record
 - `cf dns find <zone>` - Find DNS records by name and/or type
   - `--type, -t` - Record type to find
@@ -137,6 +140,9 @@ cf dns list example.com --type A
 # List records matching a name
 cf dns list example.com --name www
 
+# Search records by name, content, or comment
+cf dns list example.com --search "production"
+
 # Create an A record
 cf dns create example.com --name www --type A --content 192.0.2.1
 
@@ -146,6 +152,9 @@ cf dns create example.com --name blog --type CNAME --content example.com --proxi
 # Create an MX record with priority
 cf dns create example.com --name mail --type MX --content mail.example.com --priority 10
 
+# Create a record with a comment
+cf dns create example.com --name api --type A --content 192.0.2.10 --comment "Production API server"
+
 # Update only the content of a record
 cf dns update example.com abc123def456 --content 192.0.2.2
 
@@ -154,6 +163,12 @@ cf dns update example.com abc123def456 --proxied
 
 # Disable proxying
 cf dns update example.com abc123def456 --proxied=false
+
+# Update the comment on a record
+cf dns update example.com abc123def456 --comment "Updated comment"
+
+# Clear the comment on a record
+cf dns update example.com abc123def456 --comment ""
 
 # Delete a record
 cf dns delete example.com abc123def456
