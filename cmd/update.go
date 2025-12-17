@@ -20,7 +20,7 @@ var updateCmd = &cobra.Command{
 		fmt.Println("Checking for updates...")
 
 		ctx := context.Background()
-		latest, found, err := selfupdate.DetectLatest(ctx, selfupdate.ParseSlug("coollabsio/cf"))
+		latest, found, err := selfupdate.DetectLatest(ctx, selfupdate.ParseSlug("coollabsio/cloudflare-cli"))
 		if err != nil {
 			return fmt.Errorf("failed to detect latest version: %w", err)
 		}
